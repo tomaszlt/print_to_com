@@ -1,0 +1,20 @@
+import serial
+import sys
+COM = input("Write port nuber(1,2,3): ")
+COM_speed= input("Write COM port speed(9600,19200,38400): ")
+pnumber = input("Number of print test?: ")
+serialPort = serial.Serial(port = "COM"+COM, baudrate=COM_speed,bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
+print(f"Serial port: {serialPort.name}")
+print(f"Serial port speed: {COM_speed}")
+print(f"Port open?: {serialPort.is_open}")
+version = sys.version.encode()
+print("Printing... test")
+for x in range(0,int(pnumber)):
+    serialPort.write(b"Python version ")
+    serialPort.write(version)
+    serialPort.write(b'\n')
+    serialPort.write(b'Hello!!!!!!!!!\n' * 20)
+    serialPort.write(b'\n' * 4)
+    serialPort.write(b'i')
+serialPort.close()
+print(f"Port open?: {serialPort.is_open}")
